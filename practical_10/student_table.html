@@ -1,0 +1,86 @@
+<html>
+<body>
+<input id="search" type="text" onkeyup="filterTable()"><br>
+<br>
+<table id="studentTable" border="3">
+
+    <thead>
+    <tr>
+        <th>Student Name</th>
+        <th onclick="sortJava()">Java</th>
+        <th>DBMS</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr>
+        <td>Rahul</td>
+        <td>75</td>
+        <td>68</td>
+    </tr>
+
+    <tr>
+        <td>Zidan</td>
+        <td>45</td>
+        <td>72</td>
+    </tr>
+
+    <tr>
+        <td>Goke</td>
+        <td>88</td>
+        <td>55</td>
+    </tr>
+
+    <tr>
+        <td>Sam</td>
+        <td>32</td>
+        <td>40</td>
+    </tr>
+
+    <tr>
+        <td>Birus</td>
+        <td>61</td>
+        <td>79</td>
+    </tr>
+
+    </tbody>
+
+</table>
+<script>
+    function filterTable() {
+        let input = document.getElementById("search");
+        let text = input.value.toLowerCase();
+
+        let rows = document.querySelectorAll("#studentTable tbody tr");
+
+        rows.forEach(row => {
+            let name = row.cells[0].textContent.toLowerCase();
+
+            if (name.includes(text)) {
+                row.style.display = "";
+            }
+            else {
+                row.style.display = "none"
+            }
+        });
+    }
+
+    function sortJava() {
+        let table = document.getElementById("studentTable");
+        let tbody = table.querySelector("tbody");
+        let rows = Array.from(tbody.querySelectorAll("tr"));
+
+        rows.sort(function(a,b){
+            let javaA = parseInt(a.cells[1].textContent);
+            let javaB = parseInt(a.cells[1].textContent);
+            return javaA - javaB;
+        });
+
+        rows.forEach(function(row) {
+            tbody.appendChild(row);
+        });
+    }
+</script>
+</body>
+</html>
